@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnb_hex.c                                     :+:      :+:    :+:   */
+/*   ft_putnbr_all.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lhafsi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 16:51:24 by lhafsi            #+#    #+#             */
-/*   Updated: 2021/12/21 17:19:50 by lhafsi           ###   ########.fr       */
+/*   Updated: 2021/12/22 18:17:52 by lhafsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	ft_putnbr(int nb)
 
 void	ft_hexa_lower(int nb)
 {
-	char	base_hexa;
+	char	*base_hexa;
 
-	base_hexa[16] = "0123456789abcdef";
+	base_hexa = "0123456789abcdef";
 	if (nb == -2147483648)
 	{
 		write(1, "0x80000000", 10);
@@ -65,9 +65,9 @@ void	ft_hexa_lower(int nb)
 
 void	ft_hexa_upper(int nb)
 {
-	char	base_hexa;
+	char	*base_hexa;
 
-	base_hexa[16] = "0123456789ABCDEF";
+	base_hexa = "0123456789ABCDEF";
 	if (nb == -2147483648)
 	{
 		write(1, "0x80000000", 10);
@@ -80,9 +80,9 @@ void	ft_hexa_upper(int nb)
 	}
 	if (nb >= 16)
 	{
-		ft_putnbr_16(nb / 16);
-		ft_putnbr_16(nb % 16);
+		ft_hexa_upper(nb / 16);
+		ft_hexa_upper(nb % 16);
 	}
 	else
-		ft_putchar(base_characters[nb]);
+		ft_putchar(base_hexa[nb]);
 }
