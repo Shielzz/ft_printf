@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_print_var_hexa.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lhafsi <lhafsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/21 12:32:22 by lhafsi            #+#    #+#             */
-/*   Updated: 2021/12/26 21:09:03 by lhafsi           ###   ########.fr       */
+/*   Created: 2021/12/26 20:26:20 by lhafsi            #+#    #+#             */
+/*   Updated: 2021/12/26 23:33:05 by lhafsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar(char c)
+int	ft_print_lower(unsigned int x)
 {
-	write (1, &c, 1);
+	ft_hexa_lower(x);
+	return(get_size_xx(x));
 }
 
-void	ft_putstr(char *str)
+int	ft_print_upper(unsigned int x)
 {
-	write(1, str, ft_strlen(str));
-}
-
-size_t	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	ft_hexa_upper(x);
+	return(get_size_xx(x));
 }

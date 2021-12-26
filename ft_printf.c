@@ -3,79 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhafsi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lhafsi <lhafsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 19:58:04 by lhafsi            #+#    #+#             */
-/*   Updated: 2021/12/26 16:30:56 by lhafsi           ###   ########.fr       */
+/*   Updated: 2021/12/26 23:39:13 by lhafsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_check_var(const char *str)
-{
-	int	i;
+#include "ft_printf.h"
 
-	i = 0;
-	if (str && str[i] == '%')
-	{
-		if (str[i + 1] == 'c')
-			return (1);
-		else if (str[i + 1] == 's')
-			return (1);
-		else if (str[i + 1] == 'p')
-			return (1);
-		else if (str[i + 1] == 'd')
-			return (1);
-		else if (str[i + 1] == 'i')
-			return (1);
-		else if (str[i + 1] == 'u')
-			return (1);
-		else if (str[i + 1] == 'x')
-			return (1);
-		else if (str[i + 1] == 'X')
-			return (1);
-		else if (str[i + 1] == '%')
-			return (1);
-	}
-	return (0);
-}
-
-void	ft_put_var(const char c, va_list var)
+int	ft_put_var(const char c, va_list var)
 {
 	if (c == 'c')
-		ft_putchar(va_arg(var, char), output);
+		return (ft_print_c((char)va_arg(var, int)));
 	else if (c == 's')
-		ft_pustr(va_arg(var, char *), output);
-	else if (c =='p')
-		ft_address(va_arg (var, unsigned long long));
-	else if (c == 'd' || c =='i')
-		ft_putnbr(va_arg(var, int))
-	else if (c == 'u'):w
-		ft_unsigned(va_arg(var, unsigned int));
+		return (ft_print_s(va_arg(var, char *)));
+	else if (c == 'p')
+		return (ft_print_p(va_arg (var, unsigned long long)));
+	else if (c == 'd' || c == 'i')
+		return (ft_print_di(va_arg(var, int)));
+	else if (c == 'u')
+		return (ft_print_unsigned(va_arg(var, unsigned int)));
 	else if (c == 'x')
-		ft_hexa_lower(va_arg(var, unsigned int));
+		return (ft_print_lower(va_arg(var, unsigned int)));
 	else if (c == 'X')
-		ft_hexa_upper(va_arg(var, unsigned int));
-	else if (c == '%')
+		return (ft_print_upper(va_arg(var, unsigned int)));
+	else
+		return (ft_print_c('%'));
 }
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	var;
-	int		i;
-
+	int	i;
+	int	res;
+	
 	va_start(var, str);
 	i = 0;
-	while (str)
+	res = 0;
+	while (str[i])
 	{
-		if (ft_check_var(&str[i]))
+		if (str[i] == '%')
 		{
 			i++;
-			ft_put_var(str[i], var);
+			res = res + ft_put_var(str[i], var);
 		}
 		else
-			ft_putchar(str[i], output);
+		{
+			ft_putchar(str[i]);
+			res++;
+		}
 		i++;
 	}
 	va_end(var);
-	return (output);
+	return (res);
 }

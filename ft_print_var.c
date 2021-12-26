@@ -1,33 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_print_var.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lhafsi <lhafsi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/21 12:32:22 by lhafsi            #+#    #+#             */
-/*   Updated: 2021/12/26 21:09:03 by lhafsi           ###   ########.fr       */
+/*   Created: 2021/12/26 20:26:20 by lhafsi            #+#    #+#             */
+/*   Updated: 2021/12/26 23:31:48 by lhafsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar(char c)
+int ft_print_c(char c)
 {
-	write (1, &c, 1);
+	ft_putchar(c);
+	return (1);
 }
 
-void	ft_putstr(char *str)
+int	ft_print_s(char *str)
 {
-	write(1, str, ft_strlen(str));
+	if (str == NULL)
+	{
+		ft_putstr("(null)");
+		return (6);
+	}
+	ft_putstr(str);
+	return(ft_strlen(str));
 }
 
-size_t	ft_strlen(const char *str)
+int	ft_print_p(unsigned long long p)
 {
-	int	i;
+	write(1, "0x", 2);
+	ft_hexa_ptr(p);
+	return(get_size_p(p) + 2);
+}
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+int	ft_print_di(int d)
+{
+	ft_putnbr(d);
+	return(get_size_di(d));
+}
+
+int	ft_print_unsigned(unsigned int x)
+{
+	ft_put_unsigned(x);
+	return(get_size_u(x));
 }
