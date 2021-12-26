@@ -1,15 +1,23 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ptr_address.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lhafsi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/26 16:01:09 by lhafsi            #+#    #+#             */
+/*   Updated: 2021/12/26 16:04:38 by lhafsi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	ft_putchar(char c, int *output)
-{
-	 *output += write (1, &c, 1);
-}
+#include "ft_printf.h"
 
-void	ft_hexa_ptr(unsigned long int nb)
+// 1 - print the hexa part of the address
+void	ft_hexa_ptr(unsigned long long nb)
 {
-	char	base_hexa[16] = "0123456789abcdef";
+	char	*base_hexa;
+
+	base_hexa = "0123456789abcdef";
 	if (nb >= 16)
 	{
 		ft_hexa_ptr(nb / 16);
@@ -19,6 +27,7 @@ void	ft_hexa_ptr(unsigned long int nb)
 		ft_putchar(base_hexa[nb]);
 }
 
+//2 - print address with 0x before.
 void	ft_address(void *ptr)
 {
 	int	i;
@@ -27,13 +36,3 @@ void	ft_address(void *ptr)
 	write (1, "0x", 2);
 	ft_hexa_ptr((unsigned long int) ptr);
 }
-/*
-int	main(void)
-{
-	int a = 0 ;
-
-	printf("real printf : %p\n", &a);
-	printf("in hexa : %lx\n", (unsigned long int)&a);
-	ft_address(&a);
-	return (0);
-}*/

@@ -6,7 +6,7 @@
 /*   By: lhafsi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:32:22 by lhafsi            #+#    #+#             */
-/*   Updated: 2021/12/22 18:26:31 by lhafsi           ###   ########.fr       */
+/*   Updated: 2021/12/26 15:44:10 by lhafsi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,3 @@ size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-/*int	ft_intsize(int n, int base_len)
-{
-	int	k;
-	int	size;
-
-	size = 0;
-	k = n;
-	if (n == 0)
-		return (1);
-	if (n < 0)
-	{
-		k = -n;
-		size++;
-	}
-	while (n > 0)
-	{
-		nb = nb / base_len;
-		size++;
-	}
-	return (size);
-}*/
